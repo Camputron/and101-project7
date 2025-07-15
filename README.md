@@ -1,6 +1,6 @@
 <!-- (This is a comment) INSTRUCTIONS: Go through this page and fill out any **bolded** entries with their correct values.-->
 
-# AND101 Project 5 - Choose Your Own API
+# AND101 Project 6 - CYOAPI Part 2: RecyclerView Edition
 
 Submitted by: **Michael Campos**
 
@@ -8,7 +8,7 @@ Time spent: **2** hours spent in total
 
 ## Summary
 
-**PokeBook** is an android app that **displays information about pokemon**
+**PokeBookV2** is an android app that **displays information about pokemon from a list view.**
 
 If I had to describe this project in three (3) emojis, they would be: **🤓🧐🥸**
 
@@ -19,22 +19,18 @@ If I had to describe this project in three (3) emojis, they would be: **🤓🧐
 The following REQUIRED features are completed:
 
 - [X] Make an API call to an API of your choice using AsyncHTTPClient
-- [X] Display at least three (3) pieces of data for each API entry retrieved
-- [X] A working Button requests a new API entry and updates the data displayed
+- [X] Implement a RecyclerView to display a list of entries from the API
+- [X] Display at least three (3) pieces of data for each RecyclerView item
 
 The following STRETCH features are implemented:
 
-- [ ] Add a query to the API request
-  - The query I added is **FILL IN HERE**
-- [ ] Build a UI to allow users to add that query
+- [ ] Add a UI element for the user to interact with API further
+- [ ] Show a `Toast` or `Snackbar` when an item is clicked
+- [ ] Add item dividers with `DividerItemDecoration`
 
 The following EXTRA features are implemented:
 
 - [ ] List anything else that you added to improve the app!
-
-## API Choice
-
-My chosen API for this project is **PokeAPI**.
 
 ## Video Demo
 

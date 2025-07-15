@@ -1,11 +1,15 @@
 package com.example.and101_project5
 
 import android.graphics.BitmapFactory
+import android.media.Image
 import android.os.Bundle
-import android.widget.Button
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.ComponentActivity
+import androidx.cardview.widget.CardView
 import com.codepath.asynchttpclient.AsyncHttpClient
 import com.codepath.asynchttpclient.RequestParams
 import com.codepath.asynchttpclient.callback.BinaryHttpResponseHandler
@@ -13,29 +17,51 @@ import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler
 import okhttp3.Headers
 import okhttp3.Response
 import androidx.core.graphics.drawable.toDrawable
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+
+class CustomAdapter(
+    private val dataSet: Array<String>,
+    private val displayMonster: (String, TextView, TextView, ImageView) -> Unit
+) : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
+
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val root: CardView = view.findViewById(R.id.cardView)
+        val tvName: TextView = view.findViewById(R.id.tvName)
+        val tvType: TextView = view.findViewById(R.id.tvType)
+        val iv: ImageView = view.findViewById(R.id.iv)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.text_row_item, parent, false)
+        return ViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val monster = dataSet[position]
+        println("Display $monster")
+        displayMonster(monster, holder.tvName, holder.tvType, holder.iv)
+    }
+
+    override fun getItemCount() = dataSet.size
+}
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val bt = findViewById<Button>(R.id.btNext)
-        var idx = 0
         val monsters = arrayOf("ditto", "bulbasaur", "treecko", "exeggcute", "pikachu", "gengar", "palkia", "slowbro", "metagross", "dialga")
-        bt.setOnClickListener {
-            if (idx >= monsters.size) {
-                idx = 0
-            }
-            displayMonster(monsters[idx++])
-        }
+        val customAdapter = CustomAdapter(monsters, ::displayMonster)
+        val recyclerView: RecyclerView = findViewById(R.id.reycler)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = customAdapter
     }
 
-    private fun displayMonster(name: String) {
-        val iv = findViewById<ImageView>(R.id.iv)
-        val tvName = findViewById<TextView>(R.id.tvName)
-        val tvType = findViewById<TextView>(R.id.tvType)
+    private fun displayMonster(monster: String, tvName: TextView, tvType: TextView, iv: ImageView) {
         val client = AsyncHttpClient()
         val params = RequestParams()
-        client["https://pokeapi.co/api/v2/pokemon/${name}", params, object : JsonHttpResponseHandler() {
+        client["https://pokeapi.co/api/v2/pokemon/${monster}", params, object : JsonHttpResponseHandler() {
             override fun onSuccess(p0: Int, p1: Headers?, json: JSON) {
                 val sprites = json.jsonObject.getJSONObject("sprites")
                 val spriteUrl = sprites.getString("front_default")

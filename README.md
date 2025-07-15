@@ -8,7 +8,7 @@ Time spent: **2** hours spent in total
 
 ## Summary
 
-**PokeBookV2** is an android app that **displays information about pokemon from a list view.**
+**PokeBookV2** is an android app that **displays information about pokemon from a recycler view.**
 
 If I had to describe this project in three (3) emojis, they would be: **🤓🧐🥸**
 

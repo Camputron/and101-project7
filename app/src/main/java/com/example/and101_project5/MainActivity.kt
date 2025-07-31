@@ -9,15 +9,18 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.cardview.widget.CardView
+import androidx.core.graphics.drawable.toDrawable
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.codepath.asynchttpclient.AsyncHttpClient
 import com.codepath.asynchttpclient.RequestParams
 import com.codepath.asynchttpclient.callback.BinaryHttpResponseHandler
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexboxLayoutManager
+import com.google.android.flexbox.JustifyContent
 import okhttp3.Headers
 import okhttp3.Response
-import androidx.core.graphics.drawable.toDrawable
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 
 class PokemonAdapter(
     private val dataSet: Array<String>,
@@ -53,7 +56,9 @@ class MainActivity : ComponentActivity() {
         val monsters = arrayOf("ditto", "bulbasaur", "treecko", "exeggcute", "pikachu", "gengar", "palkia", "slowbro", "metagross", "dialga")
         val adapter = PokemonAdapter(monsters, ::displayMonster)
         val rv: RecyclerView = findViewById(R.id.reycler)
-        rv.layoutManager = LinearLayoutManager(this)
+        val layoutManager = LinearLayoutManager(this)
+        layoutManager.setOrientation(RecyclerView.VERTICAL)
+        rv.layoutManager = layoutManager
         rv.adapter = adapter
     }
 

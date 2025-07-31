@@ -1,7 +1,6 @@
 package com.example.and101_project5
 
 import android.graphics.BitmapFactory
-import android.media.Image
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -20,10 +19,10 @@ import androidx.core.graphics.drawable.toDrawable
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class CustomAdapter(
+class PokemonAdapter(
     private val dataSet: Array<String>,
     private val displayMonster: (String, TextView, TextView, ImageView) -> Unit
-) : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val root: CardView = view.findViewById(R.id.cardView)
@@ -52,10 +51,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val monsters = arrayOf("ditto", "bulbasaur", "treecko", "exeggcute", "pikachu", "gengar", "palkia", "slowbro", "metagross", "dialga")
-        val customAdapter = CustomAdapter(monsters, ::displayMonster)
-        val recyclerView: RecyclerView = findViewById(R.id.reycler)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = customAdapter
+        val adapter = PokemonAdapter(monsters, ::displayMonster)
+        val rv: RecyclerView = findViewById(R.id.reycler)
+        rv.layoutManager = LinearLayoutManager(this)
+        rv.adapter = adapter
     }
 
     private fun displayMonster(monster: String, tvName: TextView, tvType: TextView, iv: ImageView) {
